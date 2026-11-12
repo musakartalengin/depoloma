@@ -1,0 +1,6 @@
+# Windows batch files must keep CRLF line endings everywhere (clone and ZIP download).
+*.bat -text
+*.sh text eol=lf
+*.py text eol=lf
+*.ico binary
+*.png binary

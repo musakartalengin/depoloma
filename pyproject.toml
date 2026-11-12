@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "depoloma"
+description = "See where your disk space went: a storage analyzer with plain-language explanations and a confirmed cache clean-up."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+dynamic = ["version"]
+dependencies = []
+keywords = ["disk", "storage", "analyzer", "cleanup", "treemap", "wsl", "node_modules"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Topic :: System :: Filesystems",
+    "Topic :: Utilities",
+]
+
+[project.scripts]
+depoloma = "depoloma.__main__:main"
+
+[tool.setuptools]
+packages = ["depoloma"]
+
+[tool.setuptools.dynamic]
+version = { attr = "depoloma.__version__" }
+
+[tool.setuptools.package-data]
+depoloma = ["web/*"]
