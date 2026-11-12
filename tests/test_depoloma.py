@@ -119,7 +119,9 @@ class ScannerTests(unittest.TestCase):
         l5 = s.find(os.path.join(self.root, "l1", "l2", "l3", "l4", "l5"))
         self.assertEqual([c.name for c in l5.children], ["large"])
         self.assertEqual(l5.tiny_n, 30)
-        self.assertEqual(l5.size, sum(c.size for c in l5.children) + l5.tiny_b)
+        # on Linux / macOS a folder also owns the blocks of its directory entry (as `du` counts them)
+        own = 0 if os.name == "nt" else os.lstat(os.path.join(self.root, "l1", "l2", "l3", "l4", "l5")).st_blocks * 512
+        self.assertEqual(l5.size, sum(c.size for c in l5.children) + l5.tiny_b + own)
 
     def test_summary_adds_up(self):
         make(self.root, "docs/a.pdf", 2 * MB)
